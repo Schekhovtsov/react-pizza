@@ -3,8 +3,6 @@ import classNames from 'classnames';
 
 const Button = ({ onClick, className, outline, children }) => {
 
-
-
     return (
         <button
             onClick={onClick}
