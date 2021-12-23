@@ -1,10 +1,18 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Header} from './components';
 import {Routes, Route} from 'react-router-dom';
 import {Cart, Home} from './pages';
+import axios from 'axios';
 
 function App() {
 
+    const [pizzas, setPizzas] = useState([]);
+
+    useEffect(() => {
+        axios.get('/db.json').then(({data}) => {
+            setPizzas(data.pizzas)
+        });
+    }, [])
 
     return (
         <div className="wrapper">
@@ -12,7 +20,7 @@ function App() {
 
             <div className="content">
                 <Routes>
-                    <Route path={'/'} element={<Home />} />
+                    <Route path={'/'} element={<Home pizzas={pizzas}/>} />
                     <Route path={'/cart'} element={<Cart />} />
                 </Routes>
             </div>
