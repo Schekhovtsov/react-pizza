@@ -7,8 +7,18 @@ const PizzaBlock = ({name, imageUrl, types, category, sizes, price, rating}) => 
     const availableTypes = ['тонкое', 'традиционное'];
     const availableSizes = [26, 30, 40];
 
+    const indexSizes = sizes.map((item, index) => {
+        switch (item) {
+            case 26: return 0
+            case 30: return 1
+            case 40: return 2
+            default: return 0
+        }
+    })
+
     const [activeType, setActiveType] = useState(types[0]);
-    const [activeSize, setActiveSize] = useState(sizes[0]);
+    const [activeSize, setActiveSize] = useState(indexSizes[0]);
+    // В строчке выше надо получать индекс, а не значение
 
     const onSelectType = (index) => {
         setActiveType(index);
