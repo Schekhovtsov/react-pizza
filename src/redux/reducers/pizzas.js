@@ -1,4 +1,4 @@
-import {SET_PIZZAS, SET_SORT_BY} from '../const';
+import {SET_PIZZAS} from '../const';
 
 const initialState = {
     items: [],
