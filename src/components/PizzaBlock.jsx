@@ -18,7 +18,6 @@ const PizzaBlock = ({name, imageUrl, types, category, sizes, price, rating}) => 
 
     const [activeType, setActiveType] = useState(types[0]);
     const [activeSize, setActiveSize] = useState(indexSizes[0]);
-    // В строчке выше надо получать индекс, а не значение
 
     const onSelectType = (index) => {
         setActiveType(index);
@@ -32,7 +31,7 @@ const PizzaBlock = ({name, imageUrl, types, category, sizes, price, rating}) => 
         <div className="pizza-block">
             <img
                 className="pizza-block__image"
-                src={imageUrl}
+                /*src={imageUrl}*/
                 alt="Pizza"
             />
             <h4 className="pizza-block__title">{name}</h4>

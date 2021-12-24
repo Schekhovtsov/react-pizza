@@ -11,7 +11,10 @@ const Home = ({pizzas}) => {
                     onClick={(name) => console.log(name)}
                     items={['Мясные', 'Сырные' ]}/>
 
-                <SortPopup items={['популярности', 'цене', 'алфаиту']}/>
+                <SortPopup items={[ {name: 'популярности',  type: 'popular'},
+                                    {name: 'цене',  type: 'price'},
+                                    {name: 'алфавиту', type: 'alphabet'},
+                ]}/>
 
             </div>
 
