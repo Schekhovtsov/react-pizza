@@ -18,12 +18,13 @@ const Home = ({pizzas}) => {
 
             </div>
 
-            <h2 className="content__title">Все пиццы</h2>
+            {   !pizzas.length > 0
+                ? <Preloader />
+                : <h2 className="content__title">Все пиццы</h2>   }
+
             <div className="content__items">
 
-                {!pizzas && <Preloader />}
-
-                {
+                {   pizzas &&
                     pizzas.map((pizza, index) =>
                         <PizzaBlock key={pizza.id} {...pizza} />
                     )
