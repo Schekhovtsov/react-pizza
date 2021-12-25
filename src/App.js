@@ -9,12 +9,6 @@ import {useDispatch, useSelector} from 'react-redux';
 const App = () => {
 
     const dispatch = useDispatch();
-    const state = useSelector(({pizzas, filters}) => {
-        return {
-            items: pizzas.items,
-            sortBy: filters.sortBy
-        };
-    });
 
     React.useEffect(() => {
         axios.get('/db.json').then(({data}) => {
@@ -28,7 +22,7 @@ const App = () => {
 
             <div className="content">
                 <Routes>
-                    <Route path={'/'} element={<Home pizzas={state.items} />} />
+                    <Route path={'/'} element={<Home />} />
                     <Route path={'/cart'} element={<Cart />} />
                 </Routes>
             </div>
