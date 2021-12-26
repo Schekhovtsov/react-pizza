@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import ContentLoader from 'react-content-loader';
+import {PlaceholderBlock} from '../index';
 
 const PizzaBlock = ({name, imageUrl, types, category, sizes, price, rating}) => {
 
@@ -26,6 +28,8 @@ const PizzaBlock = ({name, imageUrl, types, category, sizes, price, rating}) => 
     const onSelectSize = (index) => {
         setActiveSize(index);
     }
+
+/*    return <PlaceholderBlock />*/
 
     return (
         <div className="pizza-block">

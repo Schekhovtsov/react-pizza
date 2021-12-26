@@ -1,12 +1,14 @@
 import React, {useCallback, useMemo} from 'react';
-import {Categories, PizzaBlock, Preloader, SortPopup} from '../components';
+import {Categories, PizzaBlock, PlaceholderBlock, Preloader, SortPopup} from '../components';
 import {useDispatch, useSelector} from 'react-redux';
-import {setCategory} from '../redux/actions/filters';
+import {setCategory, setSortBy} from '../redux/actions/filters';
+import {fetchPizzas} from '../redux/actions/pizzas';
 
 const Home = () => {
 
     const dispatch = useDispatch();
     const pizzas = useSelector(({pizzas}) => pizzas.items );
+    const isLoaded = useSelector(({pizzas}) => pizzas.isLoaded );
 
     const categories = ['Мясные', 'Сырные', 'Сладкие' ];
     const sortTypes =  [ {name: 'популярности',  type: 'popular'},
@@ -17,9 +19,14 @@ const Home = () => {
         dispatch(setCategory(index));
     }, []);
 
-    window.test = (index) => {
-        dispatch(setCategory(index));
-    };
+    const onSortBy = useCallback((activeItem) => {
+        dispatch(setSortBy(activeItem));
+    }, []);
+
+    React.useEffect(() => {
+
+        dispatch(fetchPizzas())
+    }, [])
 
     return (
         <div className="container">
@@ -29,20 +36,21 @@ const Home = () => {
                     onClickItem={onSelectCategory}
                     items={categories} />
 
-                <SortPopup items={sortTypes} />
+                <SortPopup
+                    onSelectItemRedux={onSortBy}
+                    items={sortTypes} />
 
             </div>
 
-            {   !pizzas.length > 0
-                ? <Preloader />
-                : <h2 className="content__title">Все пиццы</h2>   }
+            <h2 className="content__title">Все пиццы</h2>
 
             <div className="content__items">
 
-                {   pizzas &&
-                    pizzas.map((pizza, index) =>
+                {   isLoaded
+                    ? pizzas.map((pizza, index) =>
                         <PizzaBlock key={pizza.id} {...pizza} />
                     )
+                    : Array(10).fill(<PlaceholderBlock />)
                 }
 
             </div>

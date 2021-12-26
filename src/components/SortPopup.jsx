@@ -1,6 +1,9 @@
 import React, {memo, useEffect, useRef, useState} from 'react';
+import {useDispatch} from 'react-redux';
 
-const SortPopup = memo(({items}) => {
+const SortPopup = ({items, onSelectItemRedux}) => {
+
+    const dispatch = useDispatch();
 
     const [visiblePopup, setVisiblePopup] = useState(false);
     const [activeItem, setActiveItem] = useState(0);
@@ -16,10 +19,11 @@ const SortPopup = memo(({items}) => {
             setVisiblePopup(false);
         }
     }
-
-    const onSelectItem = index => {
+    // Со второго раза срабатываем правильный activeLabel
+    const onSelectItem = (index) => {
         setActiveItem(index);
         setVisiblePopup(false);
+        onSelectItemRedux(activeLabel);
     }
 
     useEffect(() => {
@@ -65,6 +69,6 @@ const SortPopup = memo(({items}) => {
 
         </div>
     );
-});
+};
 
-export default SortPopup;
+export default React.memo(SortPopup);
