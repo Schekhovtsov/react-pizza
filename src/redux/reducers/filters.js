@@ -1,7 +1,7 @@
 import {SET_CATEGORY, SET_SORT_BY} from '../const';
 
 const initialState = {
-    category: 0,
+    category: null,
     sortBy: 'popular',
 }
 

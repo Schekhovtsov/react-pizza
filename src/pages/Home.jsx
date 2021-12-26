@@ -9,6 +9,7 @@ const Home = () => {
     const dispatch = useDispatch();
     const pizzas = useSelector(({pizzas}) => pizzas.items );
     const isLoaded = useSelector(({pizzas}) => pizzas.isLoaded );
+    const {category, sortBy} = useSelector(({filters}) => filters );
 
     const categories = ['Мясные', 'Сырные', 'Сладкие' ];
     const sortTypes =  [ {name: 'популярности',  type: 'popular'},
@@ -19,25 +20,26 @@ const Home = () => {
         dispatch(setCategory(index));
     }, []);
 
-    const onSortBy = useCallback((activeItem) => {
+    const onSelectSortType = useCallback((activeItem) => {
         dispatch(setSortBy(activeItem));
     }, []);
 
     React.useEffect(() => {
-
-        dispatch(fetchPizzas())
-    }, [])
+        dispatch(fetchPizzas(category, sortBy))
+    }, [category, sortBy])
 
     return (
         <div className="container">
             <div className="content__top">
 
                 <Categories
-                    onClickItem={onSelectCategory}
+                    activeCategory={category}
+                    onClickCategory={onSelectCategory}
                     items={categories} />
 
                 <SortPopup
-                    onSelectItemRedux={onSortBy}
+                    activeSortType={sortBy}
+                    onClickSortType={onSelectSortType}
                     items={sortTypes} />
 
             </div>
@@ -50,7 +52,10 @@ const Home = () => {
                     ? pizzas.map((pizza, index) =>
                         <PizzaBlock key={pizza.id} {...pizza} />
                     )
-                    : Array(10).fill(<PlaceholderBlock />)
+                    : Array(10)
+                        .fill(0)
+                        .map((_, index) => <PlaceholderBlock key={index}/> )
+
                 }
 
             </div>

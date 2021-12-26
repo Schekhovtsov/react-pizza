@@ -1,14 +1,15 @@
 import React, {memo, useEffect, useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
+import PropTypes from 'prop-types';
 
-const SortPopup = ({items, onSelectItemRedux}) => {
+const SortPopup = ({ items, onClickSortType, activeSortType }) => {
 
     const dispatch = useDispatch();
 
     const [visiblePopup, setVisiblePopup] = useState(false);
-    const [activeItem, setActiveItem] = useState(0);
+
     const sortRef = useRef()
-    const activeLabel = items[activeItem].name;
+    const activeLabel = items.find(obj => obj.type === activeSortType).name;
 
     const toggleVisiblePopup = () => {
         setVisiblePopup(!visiblePopup);
@@ -19,18 +20,19 @@ const SortPopup = ({items, onSelectItemRedux}) => {
             setVisiblePopup(false);
         }
     }
-    // Со второго раза срабатываем правильный activeLabel
+
     const onSelectItem = (index) => {
-        setActiveItem(index);
+        if (onClickSortType) {
+            onClickSortType(index);
+        }
         setVisiblePopup(false);
-        onSelectItemRedux(activeLabel);
     }
 
     useEffect(() => {
         document.body.addEventListener('click', handleOutsideClick);
     }, [])
 
-    console.log('Ререндер сортировки')
+    // console.log('Ререндер сортировки')
 
     return (
         <div className="sort" ref={sortRef}>
@@ -57,8 +59,8 @@ const SortPopup = ({items, onSelectItemRedux}) => {
                     <div className="sort__popup">
                         <ul>
                             {items && items.map((obj, index) =>
-                                <li className={activeItem === index ? 'active' : ''}
-                                    onClick={() => onSelectItem(index)}
+                                <li className={activeSortType === obj.type ? 'active' : ''}
+                                    onClick={() => onSelectItem(obj.type)}
                                     key={`${obj.type}_${index}`}>
                                     {obj.name}
                                 </li>
@@ -70,5 +72,15 @@ const SortPopup = ({items, onSelectItemRedux}) => {
         </div>
     );
 };
+
+SortPopup.propTypes = {
+    onClickSortType: PropTypes.func.isRequired,
+    activeSortType: PropTypes.string.isRequired,
+    items: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+SortPopup.defaultProps = {
+    items: []
+}
 
 export default React.memo(SortPopup);
