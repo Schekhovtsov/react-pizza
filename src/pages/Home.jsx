@@ -12,9 +12,9 @@ const Home = () => {
     const {category, sortBy} = useSelector(({filters}) => filters );
 
     const categories = ['Мясные', 'Сырные', 'Сладкие' ];
-    const sortTypes =  [ {name: 'популярности',  type: 'popular'},
-                         {name: 'цене',  type: 'price'},
-                         {name: 'алфавиту', type: 'alphabet'}, ]
+    const sortTypes =  [ {name: 'популярности',  type: 'popular', order: 'desc'},
+                         {name: 'цене',  type: 'price', order: 'desc'},
+                         {name: 'алфавиту', type: 'name', order: 'asc'}, ]
 
     const onSelectCategory = useCallback((index) => {
         dispatch(setCategory(index));
@@ -38,7 +38,7 @@ const Home = () => {
                     items={categories} />
 
                 <SortPopup
-                    activeSortType={sortBy}
+                    activeSortType={sortBy.type}
                     onClickSortType={onSelectSortType}
                     items={sortTypes} />
 

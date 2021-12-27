@@ -5,10 +5,6 @@ import {Link} from 'react-router-dom';
 
 const Header = () => {
 
-    const cartClick = () => {
-
-    }
-
     return (<div className="header">
         <div className="container">
 
@@ -17,14 +13,14 @@ const Header = () => {
                     <img width="38" src={logoSvg} alt="Pizza logo"/>
                     <div>
                         <h1>React Pizza</h1>
-                        <p>самая вкусная пицца во вселенной</p>
+                        <h4>Стек: JS + Redux</h4>
                     </div>
                 </div>
             </Link>
 
             <Link to={'/cart'}>
                 <div className="header__cart">
-                    <Button className="button--cart" onClick={() => cartClick()}>
+                    <Button className="button--cart">
                         <span>520 ₽</span>
                         <div className="button__delimiter"></div>
                         <svg

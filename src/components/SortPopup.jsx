@@ -2,7 +2,7 @@ import React, {memo, useEffect, useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
-const SortPopup = ({ items, onClickSortType, activeSortType }) => {
+const SortPopup = React.memo(({ items, onClickSortType, activeSortType }) => {
 
     const dispatch = useDispatch();
 
@@ -60,7 +60,7 @@ const SortPopup = ({ items, onClickSortType, activeSortType }) => {
                         <ul>
                             {items && items.map((obj, index) =>
                                 <li className={activeSortType === obj.type ? 'active' : ''}
-                                    onClick={() => onSelectItem(obj.type)}
+                                    onClick={() => onSelectItem(obj)}
                                     key={`${obj.type}_${index}`}>
                                     {obj.name}
                                 </li>
@@ -71,7 +71,7 @@ const SortPopup = ({ items, onClickSortType, activeSortType }) => {
 
         </div>
     );
-};
+})
 
 SortPopup.propTypes = {
     onClickSortType: PropTypes.func.isRequired,
@@ -83,4 +83,4 @@ SortPopup.defaultProps = {
     items: []
 }
 
-export default React.memo(SortPopup);
+export default SortPopup;
