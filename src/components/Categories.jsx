@@ -2,7 +2,7 @@ import React, {memo, useState} from 'react';
 import PropTypes from 'prop-types';
 import PizzaBlock from './PizzaBlock/PizzaBlock';
 
-const Categories = React.memo(({ items, activeCategory, onClickCategory}) => {
+const Categories = ({ items, activeCategory, onClickCategory}) => {
 
     //console.log('Ререндер категорий')
 
@@ -21,7 +21,7 @@ const Categories = React.memo(({ items, activeCategory, onClickCategory}) => {
             </ul>
         </div>
     );
-})
+}
 
 Categories.propTypes = {
     //activeCategory: PropTypes.oneOf([PropTypes.number, null]),
@@ -34,4 +34,4 @@ Categories.defaultProps = {
     items: [],
 };
 
-export default Categories;
+export default React.memo(Categories);

@@ -2,7 +2,7 @@ import React, {memo, useEffect, useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
-const SortPopup = React.memo(({ items, onClickSortType, activeSortType }) => {
+const SortPopup = ({ items, onClickSortType, activeSortType }) => {
 
     const dispatch = useDispatch();
 
@@ -16,7 +16,9 @@ const SortPopup = React.memo(({ items, onClickSortType, activeSortType }) => {
     }
 
     const handleOutsideClick = (e) => {
-        if (!e.path.includes(sortRef.current)) {
+        const path = e.path ||
+            (e.composedPath && e.composedPath());
+        if (!path.includes(sortRef.current)) {
             setVisiblePopup(false);
         }
     }
@@ -32,7 +34,7 @@ const SortPopup = React.memo(({ items, onClickSortType, activeSortType }) => {
         document.body.addEventListener('click', handleOutsideClick);
     }, [])
 
-    // console.log('Ререндер сортировки')
+    //console.log('Ререндер сортировки')
 
     return (
         <div className="sort" ref={sortRef}>
@@ -71,7 +73,7 @@ const SortPopup = React.memo(({ items, onClickSortType, activeSortType }) => {
 
         </div>
     );
-})
+}
 
 SortPopup.propTypes = {
     onClickSortType: PropTypes.func.isRequired,
@@ -83,4 +85,4 @@ SortPopup.defaultProps = {
     items: []
 }
 
-export default SortPopup;
+export default React.memo(SortPopup);
