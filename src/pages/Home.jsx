@@ -1,7 +1,7 @@
 import React, {useCallback, useMemo} from 'react';
 import {Categories, PizzaBlock, PlaceholderBlock, Preloader, SortPopup} from '../components';
 import {useDispatch, useSelector} from 'react-redux';
-import {setCategory, setSortBy} from '../redux/actions/filters';
+import {setCategory, setSortBy, setSortOrder} from '../redux/actions/filters';
 import {fetchPizzas} from '../redux/actions/pizzas';
 import {ADD_PIZZA_CART} from '../redux/const';
 import {addPizzaToCart} from '../redux/actions/cart';
@@ -29,6 +29,10 @@ const Home = () => {
         dispatch(setSortBy(activeItem));
     }, []);
 
+    const onSelectSortOrder = useCallback((order) => {
+        dispatch(setSortOrder(order));
+    }, []);
+
     const handleAddPizzaToCart = (obj) => {
         dispatch(addPizzaToCart(obj))
     }
@@ -48,7 +52,9 @@ const Home = () => {
 
                 <SortPopup
                     activeSortType={sortBy.type}
+                    activeSortOrder={sortBy.order}
                     onClickSortType={onSelectSortType}
+                    onClickSortOrder={onSelectSortOrder}
                     items={sortTypes} />
 
             </div>

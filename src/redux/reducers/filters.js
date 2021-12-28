@@ -1,4 +1,4 @@
-import {SET_CATEGORY, SET_SORT_BY} from '../const';
+import {SET_CATEGORY, SET_SORT_BY, SET_SORT_ORDER, SET_SORT_TYPE_BY, SET_SORT_TYPE_ORDER} from '../const';
 
 const initialState = {
     category: null,
@@ -16,6 +16,15 @@ const filters = (state = initialState, action) => {
             return {
                 ...state,
                 sortBy: action.payload,
+            }
+
+        case SET_SORT_ORDER:
+            return {
+                ...state,
+                sortBy: {
+                    ...state.sortBy,
+                    order: action.payload
+                }
             }
 
         case SET_CATEGORY:
