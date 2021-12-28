@@ -18,7 +18,7 @@ const Header = () => {
                     <img width="38" src={logoSvg} alt="Pizza logo"/>
                     <div>
                         <h1>React Pizza</h1>
-                        <h4>Стек: JS + Redux</h4>
+                        <p>Стек: JS + Redux + Thunk + Axios</p>
                     </div>
                 </div>
             </Link>
