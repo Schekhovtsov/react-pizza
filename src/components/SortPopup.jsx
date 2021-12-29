@@ -32,7 +32,6 @@ const SortPopup = ({ items, onClickSortType, activeSortType,
     }
 
     const onChangeSortOrder = () => {
-        console.log(activeSortOrder)
         if (activeSortOrder === 'desc') {
             onClickSortOrder('asc')
         }   else    {

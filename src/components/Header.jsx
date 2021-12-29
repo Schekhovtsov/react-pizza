@@ -8,7 +8,7 @@ const Header = () => {
 
     const { totalPrice, totalCount } = useSelector(({cart}) => cart)
 
-    console.log('Header rendered')
+    //console.log('Header rendered')
 
     return (<div className="header">
         <div className="container">
