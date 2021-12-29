@@ -2,6 +2,7 @@ import React from 'react';
 import {CartItem, EmptyCart} from '../components';
 import {useDispatch, useSelector} from 'react-redux';
 import {removeCartItem, setCartClear} from '../redux/actions/cart';
+import {Link} from 'react-router-dom';
 
 const Cart = () => {
 
@@ -22,8 +23,10 @@ const Cart = () => {
         }
     }
 
-    const success = () => {
-        alert('Поздравляем, вы прошли игру и победили Шао-Кана')
+    const onClickOrder = () => {
+        alert('Поздравляем, вы прошли игру и победили Шао-Кана. Данные на бэкэнд ' +
+            'можно посмотреть в консоли разработчика')
+        console.log('Ваш заказ: ', items)
     }
 
     const onRemoveItem = (id) => {
@@ -70,13 +73,14 @@ const Cart = () => {
                     <div className="content__items">
 
                         {
-                            addedPizzas.map(obj =>
+                            addedPizzas.map((obj, index) =>
                                 <CartItem id={obj.id}
                                           name={obj.name}
                                           dough={obj.type}
                                           size={obj.size}
                                           totalPrice={items[obj.id].totalPrice}
-                                          onRemove={onRemoveItem}/>)
+                                          onRemove={onRemoveItem}
+                                          key={index} /> )
                         }
 
                     </div>
@@ -93,9 +97,12 @@ const Cart = () => {
                                           strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
 
-                                <span>Вернуться назад</span>
+                                <Link to={'/'}>
+                                    <span>Вернуться назад</span>
+                                </Link>
+
                             </a>
-                            <div onClick={success}
+                            <div onClick={onClickOrder}
                                  className="button pay-btn">
                                 <span>Оплатить сейчас</span>
                             </div>

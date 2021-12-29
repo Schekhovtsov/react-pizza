@@ -10,6 +10,7 @@ const Home = () => {
 
     const dispatch = useDispatch();
     const pizzas = useSelector(({pizzas}) => pizzas.items );
+
     const cartItems = useSelector(({cart}) => cart.items );
 
     const isLoaded = useSelector(({pizzas}) => pizzas.isLoaded );
@@ -35,6 +36,8 @@ const Home = () => {
     const handleAddPizzaToCart = (obj) => {
         dispatch(addPizzaToCart(obj))
     }
+
+    //console.log('HOME перерендерилось')
 
     React.useEffect(() => {
         dispatch(fetchPizzas(category, sortBy))
