@@ -9,15 +9,6 @@ const PizzaBlock = ({id, name, imageUrl, types, sizes, price,
     const availableTypes = ['тонкое', 'традиционное'];
     const availableSizes = [26, 30, 40];
 
-/*    const indexSizes = sizes.map((item, index) => {
-        switch (item) {
-            case 26: return 0
-            case 30: return 1
-            case 40: return 2
-            default: return 0
-        }
-    })*/
-
     const [activeType, setActiveType] = useState(types[0]);
     const [activeSize, setActiveSize] = useState(0);
 
@@ -43,7 +34,7 @@ const PizzaBlock = ({id, name, imageUrl, types, sizes, price,
         <div className="pizza-block">
             <img
                 className="pizza-block__image"
-                /*src={imageUrl}*/
+                src={imageUrl}
                 alt="Pizza"
             />
             <h4 className="pizza-block__title">{name}</h4>
