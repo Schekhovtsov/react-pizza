@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start-local": "react-scripts start",
-    "start": "concurrently \"react-scripts start\"  \"json-server -p 3001 -w public/db.json\"",
+    "start": "concurrently \"node scripts/start.js\"  \"json-server -p 3001 -w public/db.json\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
